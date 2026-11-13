@@ -750,7 +750,9 @@ fn external_executable_quotes_options_and_preserves_user_bindings_on_reload() {
     let releases = Releases::new();
     let plugin = Plugin::new("plugin's # (fixture)", &releases);
     let binary = root().join("external bin's #() % executable");
-    executable(&binary, b"#!/bin/sh\ncase \"$1\" in status) file=\"$HOME/argv-status-$2\" ;; popup) file=\"$HOME/argv-popup\" ;; esac\nprintf '%s\\0' \"$@\" > \"$file\"\nif [ \"$1\" = status ]; then printf '7%% \\302\\267 2%%'; fi\n");
+    // Write argv to a temporary file and rename it, so a waiting test never
+    // reads the file before the arguments are in it.
+    executable(&binary, b"#!/bin/sh\ncase \"$1\" in status) file=\"$HOME/argv-status-$2\" ;; popup) file=\"$HOME/argv-popup\" ;; esac\nprintf '%s\\0' \"$@\" > \"$file.tmp\" && mv \"$file.tmp\" \"$file\"\nif [ \"$1\" = status ]; then printf '7%% \\302\\267 2%%'; fi\n");
     let original = fs::read(&binary).unwrap();
     let server = server();
     server.run(&[
