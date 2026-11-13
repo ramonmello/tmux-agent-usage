@@ -32,8 +32,12 @@ impl Terminal {
         }
         // SAFETY: isatty only inspects the process's standard input descriptor.
         if raw && unsafe { libc::isatty(libc::STDIN_FILENO) } == 1 {
-            let mut original = std::mem::MaybeUninit::<libc::termios>::uninit();
-            // SAFETY: tcgetattr initializes the platform's termios on success.
+            // Zeroed, not uninit: Linux fills only the kernel's 19 control
+            // characters of libc's larger c_cc array; the rest must not be
+            // read as uninitialized memory.
+            let mut original = std::mem::MaybeUninit::<libc::termios>::zeroed();
+            // SAFETY: tcgetattr fills the fields it supports on success; every
+            // other byte is already zero.
             if unsafe { libc::tcgetattr(libc::STDIN_FILENO, original.as_mut_ptr()) } != 0 {
                 return Err(io::Error::last_os_error());
             }

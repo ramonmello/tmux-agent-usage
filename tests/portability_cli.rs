@@ -85,7 +85,8 @@ impl Pty {
         pty
     }
     fn attributes(&self) -> libc::termios {
-        let mut result = std::mem::MaybeUninit::uninit();
+        // Zeroed: Linux leaves part of libc's c_cc array unwritten.
+        let mut result = std::mem::MaybeUninit::zeroed();
         assert_eq!(
             unsafe { libc::tcgetattr(self.slave.as_raw_fd(), result.as_mut_ptr()) },
             0
