@@ -1,0 +1,17 @@
+{
+  "session_id": "fixture",
+  "rate_limits": {
+    "five_hour": {
+      "used_percentage": 7,
+      "resets_at": 1794495600
+    },
+    "seven_day": {
+      "used_percentage": 2,
+      "resets_at": 1794744000
+    }
+  },
+  "fixture_extra": {
+    "text": "preserve whitespace and non-ASCII: ação"
+  }
+}
+

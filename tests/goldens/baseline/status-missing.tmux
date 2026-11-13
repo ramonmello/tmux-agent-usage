@@ -1,0 +1,1 @@
+#[range=user|claude]#[fg=#d97757,bg=default]#[fg=#ffffff,bg=#d97757]􀀆 #[fg=#d97757,bg=#3c3836]#[fg=#fbf1c7,bg=#3c3836] #[fg=#a89984]–#[fg=#fbf1c7] #[fg=#3c3836,bg=default]#[range=right] #[range=user|codex]#[fg=#000000,bg=default]#[fg=#ffffff,bg=#000000]􀀇 #[fg=#000000,bg=#3c3836]#[fg=#fbf1c7,bg=#3c3836] #[fg=#a89984]–#[fg=#fbf1c7] #[fg=#3c3836,bg=default]#[range=right]

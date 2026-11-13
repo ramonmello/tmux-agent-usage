@@ -1,0 +1,52 @@
+[package]
+name = "tmux-agent-usage"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.88"
+description = "AI coding agent subscription usage (Claude Code, Codex) for the tmux status line"
+authors = ["Ramon Mello"]
+license = "MIT"
+repository = "https://github.com/ramonmello/tmux-agent-usage"
+readme = "README.md"
+keywords = ["tmux", "claude", "codex", "usage", "statusline"]
+categories = ["command-line-utilities"]
+include = [
+    "/Cargo.toml",
+    "/Cargo.lock",
+    "/LICENSE",
+    "/README.md",
+    "/CONTRIBUTING.md",
+    "/CHANGELOG.md",
+    "/.gitignore",
+    "/agent-usage.tmux",
+    "/src/*.rs",
+    "/docs/*.md",
+    "/examples/README.md",
+    "/examples/*.conf",
+    "/scripts/install.sh",
+    "/scripts/plugin-helpers.sh",
+    "/scripts/tmux-load.sh",
+    "/scripts/install-release.sh",
+    "/scripts/ci.sh",
+    "/scripts/release.py",
+    "/tests/*.rs",
+    "/tests/release_scripts.py",
+    "/tests/support/*.rs",
+    "/tests/fixtures/baseline/*.json",
+    "/tests/fixtures/baseline/.gitattributes",
+    "/tests/fixtures/consumer/*.conf",
+    "/tests/goldens/baseline/*.ansi",
+    "/tests/goldens/baseline/*.tmux",
+    "/tests/goldens/baseline/.gitattributes",
+]
+
+[dependencies]
+httpdate = "1.0"
+libc = "0.2"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+signal-hook = "0.3"
+unicode-width = "0.1.14"
+
+[dev-dependencies]
+vt100 = "0.15.2"

@@ -1,0 +1,95 @@
+{
+  "now": 1794484800,
+  "timezone": "UTC0",
+  "claude_observed_at": 1794481200,
+  "codex_observed_at": 1794484710,
+  "claude": {
+    "five_hour": {
+      "used_percentage": 7,
+      "resets_at": 1794495600
+    },
+    "seven_day": {
+      "used_percentage": 87,
+      "resets_at": 1794744000
+    }
+  },
+  "codex_windows": [
+    {
+      "used_percent": 95,
+      "remaining_secs": 4800,
+      "window_secs": 18000
+    },
+    {
+      "used_percent": 20,
+      "remaining_secs": 172800,
+      "window_secs": 604800
+    }
+  ],
+  "plan_type": "pro",
+  "credits": {
+    "has_credits": true,
+    "unlimited": false,
+    "balance": "12.50"
+  },
+  "cases": [
+    {
+      "name": "loading",
+      "state": "loading"
+    },
+    {
+      "name": "known",
+      "state": "known",
+      "claude_groups": [
+        {
+          "kind": "full",
+          "count": 1,
+          "expires_at": 1794571200,
+          "blocked": null
+        },
+        {
+          "kind": "fable",
+          "count": 2,
+          "expires_at": 1796299200,
+          "blocked": "usable once you hit a limit"
+        },
+        {
+          "kind": "session",
+          "count": 1,
+          "expires_at": null,
+          "blocked": "paused"
+        }
+      ],
+      "cooldown_until": 1794488400,
+      "codex_count": 3,
+      "codex_credits": [
+        {
+          "expires_at": 1794488400,
+          "title": "Full reset"
+        },
+        {
+          "expires_at": 1796299200,
+          "title": null
+        }
+      ]
+    },
+    {
+      "name": "unavailable",
+      "state": "unavailable"
+    },
+    {
+      "name": "failed",
+      "state": "failed"
+    },
+    {
+      "name": "none",
+      "state": "known",
+      "claude_groups": [],
+      "codex_count": 0
+    },
+    {
+      "name": "count-only",
+      "state": "count-only",
+      "codex_count": 2
+    }
+  ]
+}

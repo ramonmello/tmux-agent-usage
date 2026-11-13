@@ -1,0 +1,275 @@
+{
+  "now": 1794484800,
+  "timezone": "UTC0",
+  "cases": [
+    {
+      "name": "missing",
+      "claude": null,
+      "codex": null
+    },
+    {
+      "name": "missing-windows",
+      "claude": [
+        null,
+        null
+      ],
+      "codex": []
+    },
+    {
+      "name": "partial",
+      "claude": [
+        {
+          "used_percent": 7,
+          "remaining_secs": 10800,
+          "window_secs": 18000
+        },
+        null
+      ],
+      "codex": [
+        {
+          "used_percent": 28,
+          "remaining_secs": 259200,
+          "window_secs": 604800
+        }
+      ]
+    },
+    {
+      "name": "normal",
+      "claude": [
+        {
+          "used_percent": 7,
+          "remaining_secs": 10800,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 2,
+          "remaining_secs": 259200,
+          "window_secs": 604800
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": 28,
+          "remaining_secs": 10800,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 4,
+          "remaining_secs": 259200,
+          "window_secs": 604800
+        }
+      ]
+    },
+    {
+      "name": "expired",
+      "claude": [
+        {
+          "used_percent": 95,
+          "remaining_secs": -1,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 70,
+          "remaining_secs": 0,
+          "window_secs": 604800
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": 100,
+          "remaining_secs": 0,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 28,
+          "remaining_secs": -3600,
+          "window_secs": 604800
+        }
+      ]
+    },
+    {
+      "name": "high",
+      "claude": [
+        {
+          "used_percent": 69.5,
+          "remaining_secs": 10800,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 87,
+          "remaining_secs": 259200,
+          "window_secs": 604800
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": 89.49,
+          "remaining_secs": 4800,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 70,
+          "remaining_secs": 345600,
+          "window_secs": 604800
+        }
+      ]
+    },
+    {
+      "name": "critical",
+      "claude": [
+        {
+          "used_percent": 89.5,
+          "remaining_secs": 4800,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 100,
+          "remaining_secs": 259200,
+          "window_secs": 604800
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": 95,
+          "remaining_secs": 10800,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 100.4,
+          "remaining_secs": 259200,
+          "window_secs": 604800
+        }
+      ]
+    },
+    {
+      "name": "reset-soon",
+      "claude": [
+        {
+          "used_percent": 20,
+          "remaining_secs": 7200,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 28,
+          "remaining_secs": 172800,
+          "window_secs": 604800
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": 20,
+          "remaining_secs": 2400,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 2,
+          "remaining_secs": 172800,
+          "window_secs": 604800
+        }
+      ]
+    },
+    {
+      "name": "reset-outside-threshold",
+      "claude": [
+        {
+          "used_percent": 69.49,
+          "remaining_secs": 7201,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 28,
+          "remaining_secs": 172801,
+          "window_secs": 604800
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": 4,
+          "remaining_secs": 4001,
+          "window_secs": 10000
+        }
+      ]
+    },
+    {
+      "name": "zero",
+      "claude": [
+        {
+          "used_percent": 0,
+          "remaining_secs": 10800,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 0,
+          "remaining_secs": 172800,
+          "window_secs": 604800
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": 0,
+          "remaining_secs": 59,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 0,
+          "remaining_secs": 259200,
+          "window_secs": 604800
+        }
+      ]
+    },
+    {
+      "name": "clamped",
+      "claude": [
+        {
+          "used_percent": -10,
+          "remaining_secs": 10800,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 110,
+          "remaining_secs": 259200,
+          "window_secs": 604800
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": -0.5,
+          "remaining_secs": 7200,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 1000,
+          "remaining_secs": 4800,
+          "window_secs": 18000
+        }
+      ]
+    },
+    {
+      "name": "other-window",
+      "claude": [
+        {
+          "used_percent": 20,
+          "remaining_secs": 3600,
+          "window_secs": 0
+        },
+        {
+          "used_percent": 20,
+          "remaining_secs": 4000,
+          "window_secs": 10000
+        }
+      ],
+      "codex": [
+        {
+          "used_percent": 87,
+          "remaining_secs": 3900,
+          "window_secs": 18000
+        },
+        {
+          "used_percent": 95,
+          "remaining_secs": 100801,
+          "window_secs": 604800
+        }
+      ]
+    }
+  ]
+}

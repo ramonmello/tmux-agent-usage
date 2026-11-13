@@ -1,0 +1,4 @@
+# Preserve raw renderer bytes, including ANSI escapes and layout padding.
+# Byte-for-byte assertions still check every space; only text linting is off.
+*.ansi -text -whitespace
+*.tmux -text

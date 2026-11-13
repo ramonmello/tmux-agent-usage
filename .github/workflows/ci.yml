@@ -1,0 +1,94 @@
+{
+  "name": "Plugin CI",
+  "on": {
+    "push": {
+      "branches": [
+        "main",
+        "next"
+      ]
+    },
+    "pull_request": {},
+    "workflow_dispatch": {},
+    "workflow_call": {
+      "inputs": {
+        "ref": {
+          "description": "Exact commit to verify",
+          "type": "string",
+          "required": false,
+          "default": ""
+        }
+      }
+    }
+  },
+  "permissions": {
+    "contents": "read"
+  },
+  "jobs": {
+    "checks": {
+      "name": "${{ matrix.platform.target }} / Rust ${{ matrix.toolchain }}",
+      "runs-on": "${{ matrix.platform.runner }}",
+      "timeout-minutes": 35,
+      "strategy": {
+        "fail-fast": false,
+        "matrix": {
+          "platform": [
+            {
+              "runner": "macos-15",
+              "target": "aarch64-apple-darwin"
+            },
+            {
+              "runner": "macos-15-intel",
+              "target": "x86_64-apple-darwin"
+            },
+            {
+              "runner": "ubuntu-24.04",
+              "target": "x86_64-unknown-linux-musl"
+            },
+            {
+              "runner": "ubuntu-24.04-arm",
+              "target": "aarch64-unknown-linux-musl"
+            }
+          ],
+          "toolchain": [
+            "1.88.0",
+            "stable"
+          ]
+        }
+      },
+      "env": {
+        "CARGO_BUILD_TARGET": "${{ matrix.platform.target }}",
+        "CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_LINKER": "musl-gcc",
+        "CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_LINKER": "musl-gcc",
+        "MACOSX_DEPLOYMENT_TARGET": "11.0",
+        "RUST_BACKTRACE": "1"
+      },
+      "steps": [
+        {
+          "uses": "actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683",
+          "with": {
+            "persist-credentials": false,
+            "ref": "${{ inputs.ref || github.sha }}"
+          }
+        },
+        {
+          "name": "Install integration tools",
+          "shell": "bash",
+          "run": "set -euo pipefail\nif [[ \"$RUNNER_OS\" == macOS ]]; then\n  brew list tmux >/dev/null 2>&1 || brew install tmux\nelse\n  sudo apt-get update\n  sudo apt-get install -y tmux musl-tools locales\n  sudo locale-gen en_US.UTF-8\nfi"
+        },
+        {
+          "name": "Install Rust toolchain",
+          "shell": "bash",
+          "env": {
+            "CHECK_TOOLCHAIN": "${{ matrix.toolchain }}"
+          },
+          "run": "set -euo pipefail\nrustup toolchain install \"$CHECK_TOOLCHAIN\" --profile minimal --component rustfmt,clippy --target \"$CARGO_BUILD_TARGET\"\necho \"RUSTUP_TOOLCHAIN=$CHECK_TOOLCHAIN\" >> \"$GITHUB_ENV\""
+        },
+        {
+          "name": "Format, lint, tests and Cargo dry-run",
+          "shell": "bash",
+          "run": "sh scripts/ci.sh"
+        }
+      ]
+    }
+  }
+}
