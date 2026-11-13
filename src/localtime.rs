@@ -16,6 +16,9 @@ pub struct Local {
 
 impl Local {
     pub fn at(timestamp: i64) -> Option<Local> {
+        // libc deprecates time_t on musl only to announce a future width
+        // change; it is still the type localtime_r takes on every target.
+        #[allow(deprecated)]
         let timestamp = libc::time_t::try_from(timestamp).ok()?;
         let mut tm = std::mem::MaybeUninit::<libc::tm>::uninit();
         // SAFETY: libc supplies the target-specific time_t and struct tm.

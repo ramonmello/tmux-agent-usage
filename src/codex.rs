@@ -109,7 +109,7 @@ fn recent_rollouts(sessions: &Path) -> Vec<PathBuf> {
         }
     }
 
-    files.sort_by(|left, right| right.0.cmp(&left.0));
+    files.sort_by_key(|(modified, _)| std::cmp::Reverse(*modified));
     files.into_iter().map(|(_, path)| path).collect()
 }
 

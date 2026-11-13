@@ -231,7 +231,8 @@ fn fake_tmux_preserves_baseline_border_title_and_passes_literal_flags() {
             "18"
         ]
     );
-    for pair in GRUVBOX_FLAGS.chunks_exact(2).take(7) {
+    let (pairs, _) = GRUVBOX_FLAGS.as_chunks::<2>();
+    for pair in pairs.iter().take(7) {
         assert!(argv[14].contains(&format!("'{}' '{}'", pair[0], pair[1])));
     }
     assert!(!argv[14].contains("--popup-border"));
