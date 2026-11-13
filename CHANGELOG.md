@@ -4,7 +4,9 @@ All notable changes to this project are documented here. The format follows
 [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and versions follow
 [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.0] - Unreleased
+## [Unreleased]
+
+## [0.1.0] - 2026-11-13
 
 First public release.
 
@@ -26,9 +28,11 @@ First public release.
 
 ### Known limitations
 
-- Only macOS arm64 has been tested with real accounts. Linux, macOS x86_64
-  and WSL are built and tested in CI, but not yet used day to day.
+- Only macOS arm64 has been used with real accounts. Linux and macOS x86_64
+  pass the full test suite in CI but haven't been used day to day; WSL is
+  untested.
 - Native Windows is not supported.
 - On macOS, Claude saved resets don't work with a custom `CLAUDE_CONFIG_DIR`.
 
+[Unreleased]: https://github.com/ramonmello/tmux-agent-usage/compare/v0.1.0...next
 [0.1.0]: https://github.com/ramonmello/tmux-agent-usage/releases/tag/v0.1.0
