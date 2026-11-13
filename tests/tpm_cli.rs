@@ -784,6 +784,15 @@ fn external_executable_quotes_options_and_preserves_user_bindings_on_reload() {
     let mouse = binding(&server, "root", "MouseDown1Status");
     let literal = "fg=#123456, bold 'double\" # ) $(touch \"$HOME/injected\") #{session_name} %H `touch nope` \\";
     server.run(&["set-option", "-g", "@agent-usage-style-normal", literal]);
+    // The plugin must pass on exactly what tmux stores. tmux 3.4 stores a `$`
+    // followed by a variable name as `\$` (`$HOME` becomes `\$HOME`; `$(` is
+    // kept), and later versions keep it, so compare with the stored value
+    // rather than the text that was set.
+    let stored = option(&server, "@agent-usage-style-normal");
+    assert!(
+        stored == literal || stored == literal.replace("$HOME", "\\$HOME"),
+        "unexpected stored option: {stored:?}"
+    );
     server.run(&["set-option", "-g", "@agent-usage-agents", "codex claude"]);
     server.run(&["set-option", "-g", "@agent-usage-claude-resets", "on"]);
     for (role, value) in [
@@ -818,7 +827,7 @@ fn external_executable_quotes_options_and_preserves_user_bindings_on_reload() {
             "status",
             "claude",
             "--style-normal",
-            literal,
+            stored.as_str(),
             "--style-high",
             "fg=yellow",
             "--style-critical",
@@ -916,11 +925,15 @@ fn external_executable_quotes_options_and_preserves_user_bindings_on_reload() {
         "display-message",
         "alias belongs to user",
     ]);
-    let alias_binding = binding(&server, "prefix", "C-M-x");
-    assert!(!alias_binding.is_empty());
+    // tmux lists this key as C-M-x (3.7) or M-C-x (3.4); find whichever it uses.
+    let listed = ["C-M-x", "M-C-x"]
+        .into_iter()
+        .find(|key| !binding(&server, "prefix", key).is_empty())
+        .expect("user alias binding is listed");
+    let alias_binding = binding(&server, "prefix", listed);
     server.run(&["set-option", "-g", "@agent-usage-popup-key", "M-C-x"]);
     plugin.load(&server);
-    assert_eq!(binding(&server, "prefix", "C-M-x"), alias_binding);
+    assert_eq!(binding(&server, "prefix", listed), alias_binding);
     assert!(option(&server, "@agent-usage-diagnostic").contains("already bound"));
     let manifest = plugin.dir.join("Cargo.toml");
     fs::write(
